@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<title>Quiz Exam - Bonson Institute</title>
+<style>
+  body{font-family:Arial,Helvetica,sans-serif;background:#f4f4f4;margin:0;padding:0}
+  .container{max-width:850px;margin:20px auto;background:#fff;padding:20px;
+    border-radius:8px;box-shadow:0 0 8px #ccc}
+  h1{text-align:center;margin:10px 0;color:#003366}
+  .q{margin:15px 0;padding:10px;border:1px solid #ddd;border-radius:6px}
+  .opts label{display:block;margin:5px 0}
+  #timer{font-weight:bold;color:#d00;text-align:right}
+  #startScreen{text-align:center}
+  button{padding:8px 12px;margin-top:10px;cursor:pointer}
+  #score{margin-top:15px;font-weight:bold;text-align:center}
+  .correct{color:green;font-weight:bold}
+  .wrong{color:red;font-weight:bold}
+  .answerSheet{margin-top:20px}
+  .answerSheet h3{text-align:center;margin-bottom:10px}
+   #instructions {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    background-color: #f0f8ff; /* light blue background */
+    padding: 10px 15px;
+    border-left: 4px solid #007bff; /* blue left border */
+    border-radius: 4px;
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  #instructions b {
+    color: #007bff;
+  }
+</style>
+</head>
+<body>
+
+<div class="container" id="startScreen">
+  <h1>Bonson Institute of Information Technology </h1>
+  <h2>CCC - (Course on Computer Concepts)</h2>
+<p id="instructions">Enter your Name, Phone Number, and choose your Batch Time, then hit <b>Start</b> to begin.</p>
+
+
+  <input type="text" id="studentName" placeholder="Enter Your Name">
+  <input type="text" id="studentPhone" placeholder="Enter Phone No">
+
+  <!-- Batch Time Dropdown -->
+  <br><br>
+  <label for="batchTime">Select Batch Time:</label>
+  <select id="batchTime">
+    <option value="">-- Select Batch Time --</option>
+    <option value="9-10 AM">9 - 10 AM</option>
+    <option value="10-11 AM">10 - 11 AM</option>
+    <option value="11-12 PM">11 - 12 PM</option>
+    <option value="12-1 PM">12 - 1 PM</option>
+    <option value="1-2 PM">1 - 2 PM</option>
+    <option value="2-3 PM">2 - 3 PM</option>
+    <option value="3-4 PM">3 - 4 PM</option>
+    <option value="4-5 PM">4 - 5 PM</option>
+    <option value="5-6 PM">5 - 6 PM</option>
+    <option value="6-7 PM">6 - 7 PM</option>
+  </select>
+
+  <br><br>
+  <button onclick="startExam()">Start Exam</button>
+</div>
+
+<div class="container" id="quizScreen" style="display:none;">
+
+  <fieldset>
+    <legend>About Test</legend>
+
+    <div id="timer">Time Left: </div>
+
+    <ul type="circle">
+      <li><b>Total Questions: 40</b></li>
+    </ul>
+
+    <span style="float:right; " id="showName"></span>
+    <h3>✅ Instructions:</h3>
+    <ul>
+      <!-- Row 1 -->
+      <li>
+        <span>Each question carries 1 mark</span>
+      </li>
+      <!-- Row 2 -->
+      <li>
+        <span>No negative marking</span>
+        <span style="float:right;" id="showPhone"></span>
+      </li>
+      
+      <!-- Other rows -->
+      <li>Time limit: <mark>60 minutes</mark></li>
+      <span style="float:right;" id="showBatch"></span>
+      <li>Select the correct option (a/b/c/d) for each question</li>
+      <li>Do not refresh the page during the test</li>
+      <li>Submit the form after answering all questions</li>
+    </ul>
+
+    <p><b>All the best! 👍</b></p>
+  </fieldset>
+  <!-- </div> -->
+ <form id="quizForm">
+
+
+
+<div>
+ <div class="q">
+  <b>1.</b> Windows dialog box में previous tab पर जाने के लिए<br>
+  <label><input type="radio" name="q1" value="0"> Ctrl + Shift + Tab</label>
+  <label><input type="radio" name="q1" value="1"> Shift + Tab</label>
+  <label><input type="radio" name="q1" value="2"> Alt + Tab</label>
+  <label><input type="radio" name="q1" value="3"> Ctrl + Tab</label>
+</div>
+<div class="q">
+  <b>2.</b> Windows OS में Start menu display/hide करने के लिए<br>
+  <label><input type="radio" name="q2" value="0"> Windows + BREAK</label>
+  <label><input type="radio" name="q2" value="1"> Windows + M</label>
+  <label><input type="radio" name="q2" value="2"> Windows Key</label>
+  <label><input type="radio" name="q2" value="3"> Windows + D</label>
+</div>
+<div class="q">
+  <b>3.</b> Start menu किससे खुलता है?<br>
+  <label><input type="radio" name="q3" value="0"> Icon</label>
+  <label><input type="radio" name="q3" value="1"> Sidebar</label>
+  <label><input type="radio" name="q3" value="2"> Start button</label>
+  <label><input type="radio" name="q3" value="3"> None of the above</label>
+</div>
+
+<div class="q">
+  <b>4.</b> LibreOffice Writer status bar में कौन नहीं दिखता?<br>
+  <label><input type="radio" name="q4" value="0"> Total characters</label>
+  <label><input type="radio" name="q4" value="1"> Current page number</label>
+  <label><input type="radio" name="q4" value="2"> Total words</label>
+  <label><input type="radio" name="q4" value="3"> Name of Computer</label>
+</div>
+
+<div class="q">
+  <b>5.</b> LibreOffice Writer में Copy की shortcut?<br>
+  <label><input type="radio" name="q5" value="0"> Alt + C</label>
+  <label><input type="radio" name="q5" value="1"> Ctrl + Shift + C</label>
+  <label><input type="radio" name="q5" value="2"> Ctrl + C</label>
+  <label><input type="radio" name="q5" value="3"> Tab + C</label>
+</div>
+
+<div class="q">
+  <b>6.</b> What is the default extension of a Word document?<br>
+  <label><input type="radio" name="q6" value="0"> .doc</label>
+  <label><input type="radio" name="q6" value="1"> .txt</label>
+  <label><input type="radio" name="q6" value="2"> .docx</label>
+  <label><input type="radio" name="q6" value="3"> .xlsx</label>
+</div>
+
+<div class="q">
+  <b>7.</b> Which key combination is used to copy text in Word?<br>
+  <label><input type="radio" name="q7" value="0"> Ctrl + X</label>
+  <label><input type="radio" name="q7" value="1"> Ctrl + V</label>
+  <label><input type="radio" name="q7" value="2"> Ctrl + C</label>
+  <label><input type="radio" name="q7" value="3"> Ctrl + A</label>
+</div>
+
+<div class="q">
+  <b>8.</b> In Excel, what does the SUM function do?<br>
+  <label><input type="radio" name="q8" value="0"> Multiplies numbers</label>
+  <label><input type="radio" name="q8" value="1"> Finds average</label>
+  <label><input type="radio" name="q8" value="2"> Adds the values in selected cells</label>
+  <label><input type="radio" name="q8" value="3"> Sorts data</label>
+</div>
+
+<div class="q">
+  <b>9.</b> How do you insert a chart in Excel?<br>
+  <label><input type="radio" name="q9" value="0"> File → Chart</label>
+  <label><input type="radio" name="q9" value="1"> Home → Chart</label>
+  <label><input type="radio" name="q9" value="2"> Select data → Insert tab → Choose Chart type</label>
+  <label><input type="radio" name="q9" value="3"> View → Chart Wizard</label>
+</div>
+
+<div class="q">
+  <b>10.</b> What is a cell in Excel?<br>
+  <label><input type="radio" name="q10" value="0"> A single row</label>
+  <label><input type="radio" name="q10" value="1"> A single column</label>
+  <label><input type="radio" name="q10" value="2"> The intersection of a row and a column</label>
+  <label><input type="radio" name="q10" value="3"> A formula</label>
+</div>
+<div class="q">
+  <b>11.</b> Which application is used for creating presentations?<br>
+  <label><input type="radio" name="q11" value="0"> Word</label>
+  <label><input type="radio" name="q11" value="1"> Excel</label>
+  <label><input type="radio" name="q11" value="2"> PowerPoint</label>
+  <label><input type="radio" name="q11" value="3"> Paint</label>
+</div>
+
+<div class="q">
+  <b>12.</b> Shortcut for new slide in PowerPoint?<br>
+  <label><input type="radio" name="q12" value="0"> Ctrl + N</label>
+  <label><input type="radio" name="q12" value="1"> Ctrl + S</label>
+  <label><input type="radio" name="q12" value="2"> Ctrl + M</label>
+  <label><input type="radio" name="q12" value="3"> Ctrl + P</label>
+</div>
+
+<div class="q">
+  <b>13.</b> What is a placeholder in PowerPoint?<br>
+  <label><input type="radio" name="q13" value="0"> A blank slide</label>
+  <label><input type="radio" name="q13" value="1"> A template</label>
+  <label><input type="radio" name="q13" value="2"> A box used to hold text or images in a slide</label>
+  <label><input type="radio" name="q13" value="3"> A toolbar</label>
+</div>
+
+<div class="q">
+  <b>14.</b> Name the file extension of PowerPoint presentations.<br>
+  <label><input type="radio" name="q14" value="0"> .docx</label>
+  <label><input type="radio" name="q14" value="1"> .pptx</label>
+  <label><input type="radio" name="q14" value="2"> .xlsx</label>
+  <label><input type="radio" name="q14" value="3"> .pdf</label>
+</div>
+
+<div class="q">
+  <b>15.</b> What does Ctrl + B do in Word?<br>
+  <label><input type="radio" name="q15" value="0"> Italic</label>
+  <label><input type="radio" name="q15" value="1"> Underline</label>
+  <label><input type="radio" name="q15" value="2"> Bold</label>
+  <label><input type="radio" name="q15" value="3"> Align Center</label>
+</div>
+
+<div class="q">
+  <b>16.</b> What is UPI?<br>
+  <label><input type="radio" name="q16" value="0"> Unified Payment Interface</label>
+  <label><input type="radio" name="q16" value="1"> Unified Payments Interface</label>
+  <label><input type="radio" name="q16" value="2"> Universal Payment Interface</label>
+  <label><input type="radio" name="q16" value="3"> Unified Phone Interface</label>
+</div>
+
+<div class="q">
+  <b>17.</b> Which app is used for digital payments in India?<br>
+  <label><input type="radio" name="q17" value="0"> BHIM, Google Pay, PhonePe</label>
+  <label><input type="radio" name="q17" value="1"> PayPal, Venmo</label>
+  <label><input type="radio" name="q17" value="2"> Facebook Pay, Apple Pay</label>
+  <label><input type="radio" name="q17" value="3"> Amazon Pay, Flipkart Pay</label>
+</div>
+
+<div class="q">
+  <b>18.</b> What is e Governance?<br>
+  <label><input type="radio" name="q18" value="0"> Use of IT in government services</label>
+  <label><input type="radio" name="q18" value="1"> Online shopping</label>
+  <label><input type="radio" name="q18" value="2"> Social networking</label>
+  <label><input type="radio" name="q18" value="3"> Mobile gaming</label>
+</div>
+
+<div class="q">
+  <b>19.</b> What is an OTP?<br>
+  <label><input type="radio" name="q19" value="0"> One-Time Password</label>
+  <label><input type="radio" name="q19" value="1"> Online Transaction Protocol</label>
+  <label><input type="radio" name="q19" value="2"> Over Time Password</label>
+  <label><input type="radio" name="q19" value="3"> Open Transfer Protocol</label>
+</div>
+
+<div class="q">
+  <b>20.</b> What is Aadhaar?<br>
+  <label><input type="radio" name="q20" value="0"> A unique identity number issued to Indian residents</label>
+  <label><input type="radio" name="q20" value="1"> A payment app</label>
+  <label><input type="radio" name="q20" value="2"> A government policy</label>
+  <label><input type="radio" name="q20" value="3"> A mobile network operator</label>
+</div>
+
+
+<div class="q">
+  <b>21.</b> In Excel, what does a formula always start with?<br>
+  <label><input type="radio" name="q21" value="0"> =</label> <!-- Correct -->
+  <label><input type="radio" name="q21" value="1"> +</label>
+  <label><input type="radio" name="q21" value="2"> @</label>
+  <label><input type="radio" name="q21" value="3"> #</label>
+</div>
+
+<div class="q">
+  <b>22.</b> Which function returns the highest value in a range?<br>
+  <label><input type="radio" name="q22" value="0"> MAX</label> <!-- Correct -->
+  <label><input type="radio" name="q22" value="1"> HIGH</label>
+  <label><input type="radio" name="q22" value="2"> TOP</label>
+  <label><input type="radio" name="q22" value="3"> LARGE</label>
+</div>
+
+<div class="q">
+  <b>23.</b> What is the default alignment for text in Excel cells?<br>
+  <label><input type="radio" name="q23" value="0"> Left</label> <!-- Correct -->
+  <label><input type="radio" name="q23" value="1"> Center</label>
+  <label><input type="radio" name="q23" value="2"> Right</label>
+  <label><input type="radio" name="q23" value="3"> Justify</label>
+</div>
+
+<div class="q">
+  <b>24.</b> What does the function =NOW() return?<br>
+  <label><input type="radio" name="q24" value="0"> Current date and time</label> <!-- Correct -->
+  <label><input type="radio" name="q24" value="1"> Current month</label>
+  <label><input type="radio" name="q24" value="2"> Current year</label>
+  <label><input type="radio" name="q24" value="3"> File name</label>
+</div>
+
+<div class="q">
+  <b>25.</b> Which chart is best for showing parts of a whole?<br>
+  <label><input type="radio" name="q25" value="0"> Line chart</label>
+  <label><input type="radio" name="q25" value="1"> Column chart</label>
+  <label><input type="radio" name="q25" value="3"> Pie chart</label> <!-- Correct -->
+  <label><input type="radio" name="q25" value="4"> Bar chart</label>
+</div>
+
+<div class="q">
+  <b>26.</b> Which part of the computer performs most of the processing inside a computer?<br>
+  <label><input type="radio" name="q26" value="0"> CPU</label> <!-- Correct -->
+  <label><input type="radio" name="q26" value="1"> RAM</label>
+  <label><input type="radio" name="q26" value="2"> ROM</label>
+  <label><input type="radio" name="q26" value="3"> GPU</label>
+</div>
+
+<div class="q">
+  <b>27.</b> What type of memory is volatile?<br>
+  <label><input type="radio" name="q27" value="0"> RAM</label> <!-- Correct -->
+  <label><input type="radio" name="q27" value="1"> ROM</label>
+  <label><input type="radio" name="q27" value="2"> SSD</label>
+  <label><input type="radio" name="q27" value="3"> HDD</label>
+</div>
+
+<div class="q">
+  <b>28.</b> Which of the following is an input device?<br>
+  <label><input type="radio" name="q28" value="0"> Scanner</label> <!-- Correct -->
+  <label><input type="radio" name="q28" value="1"> Printer</label>
+  <label><input type="radio" name="q28" value="2"> Monitor</label>
+  <label><input type="radio" name="q28" value="3"> Speaker</label>
+</div>
+
+<div class="q">
+  <b>29.</b> Which of the following is *not* a storage device?<br>
+  <label><input type="radio" name="q29" value="0"> Monitor</label> <!-- Correct -->
+  <label><input type="radio" name="q29" value="1"> SSD</label>
+  <label><input type="radio" name="q29" value="2"> Hard Drive</label>
+  <label><input type="radio" name="q29" value="3"> CD-ROM</label>
+</div>
+
+<!-- 30 -->
+
+
+<div class="q">
+  <b>30.</b> Which of the following is NOT a type of computer memory?<br>
+  <label><input type="radio" name="q30" value="0"> ALU</label> <!-- Correct -->
+  <label><input type="radio" name="q30" value="1"> RAM</label>
+  <label><input type="radio" name="q30" value="2"> ROM</label>
+  <label><input type="radio" name="q30" value="3"> Cache</label>
+</div>
+
+
+<!-- Continue numbering from 21 onwards -->
+<div class="q">
+  <b>31.</b> What is the shortcut to save a document?<br>
+  <label><input type="radio" name="q31" value="0"> Ctrl + S</label> <!-- Correct -->
+  <label><input type="radio" name="q31" value="1"> Ctrl + P</label>
+  <label><input type="radio" name="q31" value="2"> Ctrl + O</label>
+  <label><input type="radio" name="q31" value="3"> Ctrl + C</label>
+</div>
+
+<div class="q">
+  <b>32.</b> Which of the following is an example of an operating system?<br>
+  <label><input type="radio" name="q32" value="0"> Microsoft Word</label>
+  <label><input type="radio" name="q32" value="1"> Windows 10</label> <!-- Correct -->
+  <label><input type="radio" name="q32" value="2"> Google Chrome</label>
+  <label><input type="radio" name="q32" value="3"> Adobe Photoshop</label>
+</div>
+
+<div class="q">
+  <b>33.</b> What does URL stand for?<br>
+  <label><input type="radio" name="q33" value="0"> Uniform Resource Locator</label> <!-- Correct -->
+  <label><input type="radio" name="q33" value="1"> Universal Resource Link</label>
+  <label><input type="radio" name="q33" value="2"> Uniform Reference Link</label>
+  <label><input type="radio" name="q33" value="3"> Universal Reference Locator</label>
+</div>
+
+<div class="q">
+  <b>34.</b> What is the primary function of a web browser?<br>
+  <label><input type="radio" name="q34" value="0"> To access and view websites</label> <!-- Correct -->
+  <label><input type="radio" name="q34" value="1"> To edit documents</label>
+  <label><input type="radio" name="q34" value="2"> To send emails</label>
+  <label><input type="radio" name="q34" value="3"> To create presentations</label>
+</div>
+
+<div class="q">
+  <b>35.</b> What is the shortcut key to undo an action?<br>
+  <label><input type="radio" name="q35" value="0"> Ctrl + Y</label>
+  <label><input type="radio" name="q35" value="1"> Ctrl + Z</label> <!-- Correct -->
+  <label><input type="radio" name="q35" value="2"> Ctrl + X</label>
+  <label><input type="radio" name="q35" value="3"> Ctrl + C</label>
+</div>
+
+<div class="q">
+  <b>36.</b> Which device is used to connect to the internet wirelessly?<br>
+  <label><input type="radio" name="q36" value="0"> Router</label> <!-- Correct -->
+  <label><input type="radio" name="q36" value="1"> Printer</label>
+  <label><input type="radio" name="q36" value="2"> Monitor</label>
+  <label><input type="radio" name="q36" value="3"> Keyboard</label>
+</div>
+
+<div class="q">
+  <b>37.</b> Which one is an example of cloud storage?<br>
+  <label><input type="radio" name="q37" value="0"> Google Drive</label> <!-- Correct -->
+  <label><input type="radio" name="q37" value="1"> Hard Disk</label>
+  <label><input type="radio" name="q37" value="2"> USB Drive</label>
+  <label><input type="radio" name="q37" value="3"> DVD</label>
+</div>
+
+<div class="q">
+  <b>38.</b> What is phishing?<br>
+  <label><input type="radio" name="q38" value="0"> Attempt to steal sensitive information by pretending to be trustworthy</label> <!-- Correct -->
+  <label><input type="radio" name="q38" value="1"> A type of antivirus software</label>
+  <label><input type="radio" name="q38" value="2"> A programming language</label>
+  <label><input type="radio" name="q38" value="3"> A type of computer virus</label>
+</div>
+
+<div class="q">
+  <b>39.</b> Which of the following is a search engine?<br>
+  <label><input type="radio" name="q39" value="0"> Google</label> <!-- Correct -->
+  <label><input type="radio" name="q39" value="1"> Gmail</label>
+  <label><input type="radio" name="q39" value="2"> Facebook</label>
+  <label><input type="radio" name="q39" value="3"> YouTube</label>
+</div>
+
+<div class="q">
+  <b>40.</b> What does HTTP stand for?<br>
+  <label><input type="radio" name="q40" value="0"> HyperText Transfer Protocol</label> <!-- Correct -->
+  <label><input type="radio" name="q40" value="1"> HyperText Transmission Protocol</label>
+  <label><input type="radio" name="q40" value="2"> Hyper Transfer Text Protocol</label>
+  <label><input type="radio" name="q40" value="3"> Hyperlink Transfer Protocol</label>
+</div>
+
+
+
+</div>
+
+
+<button type="button" id="submitBtn" onclick="submitQuiz()" disabled>Submit</button>
+
+
+<!-- <button type="button" id="submitBtn" onclick="submitQuiz()" disabled>Submit</button> -->
+
+
+</div>
+
+<div class="container" id="resultScreen" style="display:none;">
+  <h1>Bonson Institute of Information Technology Aligarh</h1>
+  <h2>Result Sheet</h2>
+  <div id="studentResult"></div>
+  <div id="score"></div>
+  <div class="answerSheet" id="answerSheet"></div>
+</div>
+
+<script>
+
+function displayDetails() {
+  let name = document.getElementById("studentName").value;
+  let phone = document.getElementById("studentPhone").value;
+  let batchTime = document.getElementById("batchTime").value;
+
+  if (name.trim() !== "") {
+    document.getElementById("showName").innerHTML = "NAME : " + name;
+  }
+
+  if (phone.trim() !== "") {
+    document.getElementById("showPhone").innerHTML = "PHONE : " + phone;
+  }
+
+  if (batchTime.trim() !== "") {
+    document.getElementById("showBatch").innerHTML = "BATCH TIME : " + batchTime;
+  }
+}
+
+
+
+
+let duration = 10 * 60; 
+let timerInterval;
+
+
+const answers = {
+  q1:0, q2:2, q3:2, q4:3, q5:2,
+  q6:2, q7:2, q8:2, q9:2, q10:2,
+  q11:2, q12:2, q13:2, q14:1, q15:2,
+  q16:1, q17:0, q18:0, q19:0, q20:0,
+  q21:0, q22:0, q23:0, q24:0, q25:3,
+  q26:0, q27:0, q28:0, q29:0,
+  q30:0, q31:0, q32:1, q33:0, q34:0,
+  q35:1, q36:0, q37:0, q38:0, q39:0,
+  q40:0
+};
+
+
+const solutions = {
+
+q1: "Ctrl + Shift + Tab moves to the previous tab in Windows dialog boxes or browsers.",
+q2: "Pressing the Windows key opens or hides the Start menu in Windows OS. It’s the main navigation key.",
+q3: "The Start button on the taskbar opens the Start menu in Windows OS.",
+q4: "The status bar in LibreOffice Writer shows details like word count and page number, but not the name of the computer.",
+q5: "Ctrl + C is used to copy selected text or content in LibreOffice Writer.",
+q6: "The default extension of modern Word documents is .docx. It replaced the older .doc format after Word 2007.",
+q7: "Ctrl + C is the shortcut to copy text. It allows you to duplicate content without removing it from the original place.",
+q8: "The SUM function in Excel adds all the values in the selected cells. It is one of the most commonly used functions.",
+q9: "To insert a chart in Excel, select the data → go to Insert tab → choose the chart type. This helps visualize data effectively.",
+q10: "A cell in Excel is the intersection of a row and a column. Each cell is identified by its unique address, like A1 or B2.",
+q11: "PowerPoint is used to create digital presentations with slides, text, images, and multimedia.",
+q12: "Ctrl + M inserts a new slide in PowerPoint during presentation creation.",
+q13: "A placeholder is a pre-formatted container used to insert text, images, or charts in a slide.",
+q14: ".pptx is the default file extension for PowerPoint presentations created in modern versions.",
+q15: "Ctrl + B makes selected text bold in word processors like Microsoft Word.",
+q16: "UPI stands for Unified Payments Interface — a real-time payment system developed in India.",
+q17: "Apps like BHIM, Google Pay, and PhonePe are commonly used for digital payments in India using UPI.",
+q18: "E-Governance refers to the use of digital technologies in delivering government services efficiently.",
+// Existing ones from q19 onward remain unchanged
+q19: "OTP stands for One-Time Password. It’s a secure code used for verification in digital transactions.",
+q20: "Aadhaar is a unique identity number issued by the Indian government to residents for identification.",
+
+
+
+
+q21: "In Excel, every formula starts with an equals sign (=) to indicate a calculation or function.",
+q22: "The MAX function in Excel returns the highest numeric value in a given range of cells.",
+q23: "By default, text in Excel cells is aligned to the left unless manually changed.",
+q24: "The =NOW() function in Excel returns the current system date and time.",
+q25: "A pie chart is best for showing how different parts make up a whole set of data.",
+q26: "The CPU (Central Processing Unit) handles most processing tasks in a computer system.",
+q27: "RAM is a volatile memory, meaning it loses its data when the computer is powered off.",
+q28: "A scanner is an input device that captures images or documents and sends them to the computer.",
+q29: "A monitor is not a storage device; it displays output, while devices like SSD or HDD store data.",
+
+// --->
+
+q30: "ALU (Arithmetic Logic Unit) is part of the CPU and performs calculations; it is not a type of memory like RAM, ROM, or Cache.",
+
+  q31: "Ctrl + S is the shortcut to save a document quickly.",
+  q32: "Windows 10 is an operating system that manages hardware and software.",
+  q33: "URL stands for Uniform Resource Locator, the address of a web page.",
+  q34: "A browser’s primary job is to access and view websites.",
+  q35: "Ctrl + Z is the shortcut key to undo the last action.",
+  q36: "A router is used to connect devices wirelessly to the internet.",
+  q37: "Google Drive is a cloud storage service that stores files online.",
+  q38: "Phishing is an attempt to steal sensitive information by pretending to be trustworthy.",
+  // q39: "Google is the most widely used search engine on the internet.",
+  q40: "HTTP stands for HyperText Transfer Protocol, used for transferring data on the web."
+
+};
+
+let studentName="";
+let studentPhone = "";
+let studentBatch = "";
+
+function startExam() {
+  studentName = document.getElementById("studentName").value.trim();
+  studentPhone = document.getElementById("studentPhone").value.trim();
+  studentBatch = document.getElementById("batchTime").value.trim();
+
+  if (!studentName) { alert("Please Enter Your Name "); return; }
+  if (!studentPhone) { alert("Please Enter Your Phone Number"); return; }
+  if (!studentBatch) { alert("Please Enter Batch Time"); return; }
+
+  document.getElementById("startScreen").style.display = "none";
+  document.getElementById("quizScreen").style.display = "block";
+  startTimer();
+  displayDetails();
+
+  document.querySelectorAll('input[type=radio]').forEach(radio => {
+    radio.addEventListener('change', checkAllAnswered);
+  });
+  checkAllAnswered(); // initial check
+}
+
+
+let duration1 = 60 * 60; // 60 minutes = 3600 seconds
+
+function startTimer(){
+  timerInterval = setInterval(() => {
+    let min = Math.floor(duration1 / 60),
+        sec = duration1 % 60;
+
+    document.getElementById("timer").textContent =
+      `Time Left: ${min}:${sec < 10 ? '0' + sec : sec}`;
+
+    duration1--;
+    if(duration1 < 0){
+      clearInterval(timerInterval);
+      submitQuiz(true);
+    }
+  }, 1000);
+}
+
+
+function checkAllAnswered(){
+  let total=Object.keys(answers).length;
+  let answered=0;
+  for(let q in answers){
+    if(document.querySelector('input[name="'+q+'"]:checked')) answered++;
+  }
+  document.getElementById("submitBtn").disabled = (answered === 0);
+
+}
+
+function submitQuiz(auto=false){
+  if (!auto) {
+    let pin = prompt("Enter 4-digit PIN to submit:");
+    if (pin !== "2992") {
+      alert("Invalid PIN! Submission cancelled.");
+      return;
+    }
+  }
+
+  clearInterval(timerInterval);
+  let correct=0, total=Object.keys(answers).length, answerHTML="";
+  let qCount=0;
+
+  for(let q in answers){
+    qCount++;
+    let chosen = document.querySelector('input[name="'+q+'"]:checked');
+    let correctAnsIndex = answers[q];
+    let options = document.getElementsByName(q);
+
+    // ✅ Safe check (avoid crash if option missing)
+    let correctText = options[correctAnsIndex] 
+        ? options[correctAnsIndex].parentElement.innerText.trim()
+        : "Not defined in answers";
+
+    let solutionText = solutions[q] || "";
+
+    if(chosen){
+      let chosenText = chosen.parentElement.innerText.trim();
+      if(parseInt(chosen.value) === correctAnsIndex){
+        correct++;
+        answerHTML += `<p><b>Q${qCount}:</b> <span class="correct">${chosenText} ✔</span><br><small><i>${solutionText}</i></small></p>`;
+      } else {
+        answerHTML += `<p><b>Q${qCount}:</b> <span class="wrong">${chosenText} ✘</span><br>✔ Correct: <span class="correct">${correctText}</span><br><small><i>${solutionText}</i></small></p>`;
+      }
+    } else {
+      answerHTML += `<p><b>Q${qCount}:</b> <span class="wrong">No answer selected ✘</span><br>✔ Correct: <span class="correct">${correctText}</span><br><small><i>${solutionText}</i></small></p>`;
+    }
+  }
+
+  document.getElementById("quizScreen").style.display="none";
+  document.getElementById("resultScreen").style.display="block";
+ document.getElementById("studentResult").innerHTML = `
+  <div style="line-height: 1.6;">
+    <h3>Student: ${studentName}</h3>
+    <h3>Phone: ${studentPhone}</h3>
+    <h3>Batch Time: ${studentBatch}</h3>
+  </div>
+`;
+
+  
+  document.getElementById("score").innerHTML=`<h3>Score: ${correct} / ${total}</h3>`;
+  document.getElementById("answerSheet").innerHTML = "<h3>Answer Sheet</h3>" + answerHTML;
+  document.getElementById("submitBtn").disabled = true;
+  
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>
