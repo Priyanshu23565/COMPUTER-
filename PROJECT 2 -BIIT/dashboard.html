@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Training Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Training Management Dashboard</h2>
+
+  <!-- Filters -->
+  <div>
+    <label>Year:</label>
+    <select id="yearFilter">
+      <option value="all">All</option>
+      <option value="2017-2020">2017-2020</option>
+      <option value="2021-2026">2021-2026</option>
+    </select>
+
+    <label>Scheme:</label>
+    <select id="schemeFilter">
+      <option value="all">All</option>
+      <option value="UPSDM">UPSDM</option>
+      <option value="PMKVY">PMKVY</option>
+    </select>
+    <button onclick="filterData()">Apply Filter</button>
+  </div>
+
+  <!-- Add Target -->
+  <h3>Add Target</h3>
+  <input type="text" id="managerName" placeholder="Manager Name" />
+  <input type="number" id="studentCount" placeholder="No. of Students" />
+  <input type="number" id="amount" placeholder="Total Amount" />
+  <input type="date" id="targetDate" />
+  <select id="scheme">
+    <option value="UPSDM">UPSDM</option>
+    <option value="PMKVY">PMKVY</option>
+  </select>
+  <button onclick="addTarget()">Add Target</button>
+
+  <!-- Add Payment -->
+  <h3>Add Payment</h3>
+  <select id="paymentManager">
+    <option value="">-- Select Manager --</option>
+    <!-- Dynamic options will be filled from JS -->
+  </select>
+  <input type="number" id="paymentAmount" placeholder="Payment Amount" />
+  <input type="date" id="paymentDate" />
+  <button onclick="addPayment()">Add Payment</button>
+
+  <!-- Report Table -->
+  <h3>Final Report</h3>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Manager</th>
+        <th>Target</th>
+        <th>Amount</th>
+        <th>Payment Given</th>
+        <th>Pending Amount</th>
+        <th>Last Payment Date</th>
+        <th>Scheme</th>
+        <th>Date</th>
+        <th>% Paid</th>
+      </tr>
+    </thead>
+    <tbody id="reportTable"></tbody>
+  </table>
+
+  <!-- History Section -->
+  <h3>Payment History (Date-wise)</h3>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Manager</th>
+        <th>Amount</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody id="paymentHistoryTable"></tbody>
+  </table>
+
+  <script src="script.js"></script>
+</body>
+</html>
